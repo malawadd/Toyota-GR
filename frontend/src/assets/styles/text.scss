@@ -1,0 +1,228 @@
+/** Font Sizes */
+$sizes: (8, 10, 11, 12, 13, 14, 15, 16, 18, 20, 24, 26, 32, 36, 38, 40);
+
+@each $size in $sizes {
+	.fz--#{$size} {
+		font-size: #{$size}px;
+	}
+}
+
+/* Font Weight - Bold Grotesk Style */
+$weights: (400, 600, 700, 900);
+
+@each $weight in $weights {
+	.fw--#{$weight} {
+		font-weight: #{$weight};
+	}
+}
+
+/* Line Height (%) */
+$heights: (
+	100: 1,
+	110: 1.1,
+	120: 1.2,
+	130: 1.3,
+	140: 1.4,
+	150: 1.5,
+	160: 1.6,
+	180: 1.8,
+);
+
+@each $height, $value in $heights {
+	.lh--#{$height} {
+		line-height: #{$value};
+	}
+}
+
+/* Text Align */
+$alignments: (
+	center: "center",
+	left: "left",
+	right: "right",
+);
+
+@each $align, $value in $alignments {
+	.ta--#{$align} {
+		text-align: #{$value};
+	}
+}
+
+/* Neon Colors with Glow Effects */
+$textColors: (
+	"primary": "--txt-primary",
+	"body": "--txt-body",
+	"secondary": "--txt-secondary",
+	"tertiary": "--txt-tertiary",
+	"support": "--txt-support",
+	"black": "--txt-black",
+	"white": "--txt-white",
+	"blue": "--blue",
+	"orange": "--orange",
+	"light-orange": "--light-orange",
+	"green": "--green",
+	"brand": "--brand",
+	"neutral-green": "--neutral-green",
+	"red": "--red",
+	"yellow": "--yellow",
+	"purple": "--purple",
+	"neon-lime": "--neon-lime",
+	"neon-cyan": "--neon-cyan",
+	"neon-magenta": "--neon-magenta",
+	"warning": "--txt-warning",
+	"error": "--txt-error",
+);
+
+@each $key, $value in $textColors {
+	.color--#{$key} {
+		color: var(#{$value});
+		
+		@if $key == "primary" or $key == "neon-lime" or $key == "neon-cyan" or $key == "neon-magenta" {
+			text-shadow: 0 0 10px var(#{$value});
+		}
+	}
+}
+
+@each $key, $value in $textColors {
+	.fill--#{$key} {
+		fill: var(#{$value});
+		
+		@if $key == "primary" or $key == "neon-lime" or $key == "neon-cyan" or $key == "neon-magenta" {
+			filter: drop-shadow(0 0 5px var(#{$value}));
+		}
+	}
+}
+
+/* Typography Styles */
+.no-wrap {
+	white-space: nowrap;
+}
+
+.mono {
+	font-family: 'Courier New', 'Monaco', 'Menlo', monospace;
+	font-weight: 600;
+	letter-spacing: 0.5px;
+}
+
+.tabular {
+	font-variant: tabular-nums;
+}
+
+.selectable {
+	user-select: text;
+}
+
+/* Command Line Style Headers */
+.command-header {
+	font-family: 'Arial Black', sans-serif;
+	font-weight: 900;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	color: var(--neon-lime);
+	text-shadow: 0 0 15px var(--neon-lime);
+	position: relative;
+	
+	&::before {
+		content: '> ';
+		color: var(--neon-cyan);
+		text-shadow: 0 0 10px var(--neon-cyan);
+	}
+}
+
+/* Status Text Styles */
+.status-text {
+	font-family: 'Courier New', monospace;
+	text-transform: uppercase;
+	font-weight: 700;
+	letter-spacing: 1px;
+	
+	&.online {
+		color: var(--neon-lime);
+		text-shadow: 0 0 10px var(--neon-lime);
+		
+		&::before {
+			content: '● ';
+			animation: pulse 2s infinite;
+		}
+	}
+	
+	&.offline {
+		color: var(--neon-magenta);
+		text-shadow: 0 0 10px var(--neon-magenta);
+		
+		&::before {
+			content: '● ';
+			animation: pulse 2s infinite;
+		}
+	}
+	
+	&.warning {
+		color: var(--neon-yellow);
+		text-shadow: 0 0 10px var(--neon-yellow);
+		
+		&::before {
+			content: '⚠ ';
+		}
+	}
+}
+
+@keyframes pulse {
+	0%, 100% { opacity: 1; }
+	50% { opacity: 0.5; }
+}
+
+/* Glitch Text Effect */
+.glitch-text {
+	position: relative;
+	color: var(--neon-lime);
+	
+	&::before,
+	&::after {
+		content: attr(data-text);
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+	}
+	
+	&::before {
+		animation: glitch-1 0.5s infinite;
+		color: var(--neon-magenta);
+		z-index: -1;
+	}
+	
+	&::after {
+		animation: glitch-2 0.5s infinite;
+		color: var(--neon-cyan);
+		z-index: -2;
+	}
+}
+
+/* Holographic Text */
+.holographic-text {
+	background: linear-gradient(45deg, var(--neon-lime), var(--neon-cyan), var(--neon-magenta), var(--neon-lime));
+	background-size: 400% 400%;
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+	animation: holographicShift 3s ease-in-out infinite;
+}
+
+@keyframes holographicShift {
+	0%, 100% { background-position: 0% 50%; }
+	50% { background-position: 100% 50%; }
+}
+
+/* Data Stream Text */
+.data-stream {
+	font-family: 'Courier New', monospace;
+	color: var(--neon-lime);
+	text-shadow: 0 0 5px var(--neon-lime);
+	animation: dataFlow 2s linear infinite;
+}
+
+@keyframes dataFlow {
+	0% { opacity: 0.7; }
+	50% { opacity: 1; }
+	100% { opacity: 0.7; }
+}

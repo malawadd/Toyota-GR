@@ -1,0 +1,38 @@
+{
+  "name": "racing-data-api",
+  "version": "1.0.0",
+  "description": "REST API for Toyota GR Cup Series race data",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "test": "vitest --run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest --coverage",
+    "import": "node import-data.js"
+  },
+  "keywords": [
+    "racing",
+    "api",
+    "rest",
+    "express",
+    "sqlite"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "better-sqlite3": "^9.2.2",
+    "node-cache": "^5.1.2",
+    "express-validator": "^7.0.1",
+    "winston": "^3.11.0",
+    "cors": "^2.8.5"
+  },
+  "devDependencies": {
+    "vitest": "^1.2.0",
+    "supertest": "^6.3.3",
+    "fast-check": "^3.15.0",
+    "@types/express": "^4.17.21"
+  }
+}

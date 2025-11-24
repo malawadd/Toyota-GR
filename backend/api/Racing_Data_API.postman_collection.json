@@ -1,0 +1,788 @@
+{
+  "info": {
+    "name": "Racing Data API",
+    "description": "Toyota GR Cup Series Racing Data API - Complete collection of all endpoints",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "racing-data-api"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000/api",
+      "type": "string"
+    },
+    {
+      "key": "vehicleId",
+      "value": "GR86-004-78",
+      "type": "string"
+    },
+    {
+      "key": "carNumber",
+      "value": "78",
+      "type": "string"
+    },
+    {
+      "key": "lap",
+      "value": "10",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Health",
+      "item": [
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/health",
+              "host": ["{{baseUrl}}"],
+              "path": ["health"]
+            },
+            "description": "Check API health, database connectivity, cache statistics, and system uptime"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Vehicles",
+      "item": [
+        {
+          "name": "Get All Vehicles",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/vehicles",
+              "host": ["{{baseUrl}}"],
+              "path": ["vehicles"]
+            },
+            "description": "Get all vehicles with optional filtering and sorting"
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Vehicles (Filtered by Class)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/vehicles?class=Pro",
+              "host": ["{{baseUrl}}"],
+              "path": ["vehicles"],
+              "query": [
+                {
+                  "key": "class",
+                  "value": "Pro"
+                }
+              ]
+            },
+            "description": "Get vehicles filtered by class"
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Vehicles (Sorted)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/vehicles?sortBy=fastest_lap&order=asc",
+              "host": ["{{baseUrl}}"],
+              "path": ["vehicles"],
+              "query": [
+                {
+                  "key": "sortBy",
+                  "value": "fastest_lap"
+                },
+                {
+                  "key": "order",
+                  "value": "asc"
+                }
+              ]
+            },
+            "description": "Get vehicles sorted by fastest lap"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Vehicle by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/vehicles/{{vehicleId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["vehicles", "{{vehicleId}}"]
+            },
+            "description": "Get detailed information for a specific vehicle"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Vehicle by Car Number",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/vehicles/by-number/{{carNumber}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["vehicles", "by-number", "{{carNumber}}"]
+            },
+            "description": "Get vehicle by car number"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Telemetry",
+      "item": [
+        {
+          "name": "Get Telemetry",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/telemetry?vehicleId={{vehicleId}}&page=1&limit=100",
+              "host": ["{{baseUrl}}"],
+              "path": ["telemetry"],
+              "query": [
+                {
+                  "key": "vehicleId",
+                  "value": "{{vehicleId}}"
+                },
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "100"
+                }
+              ]
+            },
+            "description": "Get telemetry data with pagination"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Telemetry for Specific Lap",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/telemetry?vehicleId={{vehicleId}}&lap={{lap}}&limit=500",
+              "host": ["{{baseUrl}}"],
+              "path": ["telemetry"],
+              "query": [
+                {
+                  "key": "vehicleId",
+                  "value": "{{vehicleId}}"
+                },
+                {
+                  "key": "lap",
+                  "value": "{{lap}}"
+                },
+                {
+                  "key": "limit",
+                  "value": "500"
+                }
+              ]
+            },
+            "description": "Get telemetry data for a specific lap"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Telemetry (Filtered by Type)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/telemetry?vehicleId={{vehicleId}}&telemetryNames=speed_can,gear&limit=200",
+              "host": ["{{baseUrl}}"],
+              "path": ["telemetry"],
+              "query": [
+                {
+                  "key": "vehicleId",
+                  "value": "{{vehicleId}}"
+                },
+                {
+                  "key": "telemetryNames",
+                  "value": "speed_can,gear"
+                },
+                {
+                  "key": "limit",
+                  "value": "200"
+                }
+              ]
+            },
+            "description": "Get specific telemetry types"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Telemetry by Vehicle",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/telemetry/vehicle/{{vehicleId}}?page=1&limit=100",
+              "host": ["{{baseUrl}}"],
+              "path": ["telemetry", "vehicle", "{{vehicleId}}"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "100"
+                }
+              ]
+            },
+            "description": "Get telemetry for a specific vehicle"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Telemetry by Vehicle and Lap",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/telemetry/vehicle/{{vehicleId}}/lap/{{lap}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["telemetry", "vehicle", "{{vehicleId}}", "lap", "{{lap}}"]
+            },
+            "description": "Get telemetry for a specific vehicle and lap"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Telemetry Statistics",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/telemetry/vehicle/{{vehicleId}}/stats",
+              "host": ["{{baseUrl}}"],
+              "path": ["telemetry", "vehicle", "{{vehicleId}}", "stats"]
+            },
+            "description": "Get aggregated telemetry statistics"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Telemetry Statistics for Lap",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/telemetry/vehicle/{{vehicleId}}/stats?lap={{lap}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["telemetry", "vehicle", "{{vehicleId}}", "stats"],
+              "query": [
+                {
+                  "key": "lap",
+                  "value": "{{lap}}"
+                }
+              ]
+            },
+            "description": "Get telemetry statistics for a specific lap"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Lap Times",
+      "item": [
+        {
+          "name": "Get All Lap Times",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/lap-times?page=1&limit=100",
+              "host": ["{{baseUrl}}"],
+              "path": ["lap-times"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "100"
+                }
+              ]
+            },
+            "description": "Get all lap times with pagination"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Lap Times by Vehicle",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/lap-times/vehicle/{{vehicleId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["lap-times", "vehicle", "{{vehicleId}}"]
+            },
+            "description": "Get lap times for a specific vehicle"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Lap Times (Lap Range)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/lap-times/vehicle/{{vehicleId}}?minLap=10&maxLap=20",
+              "host": ["{{baseUrl}}"],
+              "path": ["lap-times", "vehicle", "{{vehicleId}}"],
+              "query": [
+                {
+                  "key": "minLap",
+                  "value": "10"
+                },
+                {
+                  "key": "maxLap",
+                  "value": "20"
+                }
+              ]
+            },
+            "description": "Get lap times within a lap range"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Fastest Laps",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/lap-times/fastest?limit=10",
+              "host": ["{{baseUrl}}"],
+              "path": ["lap-times", "fastest"],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ]
+            },
+            "description": "Get fastest lap times"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Fastest Laps by Class",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/lap-times/fastest?class=Pro&limit=20",
+              "host": ["{{baseUrl}}"],
+              "path": ["lap-times", "fastest"],
+              "query": [
+                {
+                  "key": "class",
+                  "value": "Pro"
+                },
+                {
+                  "key": "limit",
+                  "value": "20"
+                }
+              ]
+            },
+            "description": "Get fastest laps for a specific class"
+          },
+          "response": []
+        },
+        {
+          "name": "Compare Lap Times",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/lap-times/compare?vehicleIds=GR86-004-78,GR86-004-46",
+              "host": ["{{baseUrl}}"],
+              "path": ["lap-times", "compare"],
+              "query": [
+                {
+                  "key": "vehicleIds",
+                  "value": "GR86-004-78,GR86-004-46"
+                }
+              ]
+            },
+            "description": "Compare lap times for multiple vehicles"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Race Results",
+      "item": [
+        {
+          "name": "Get All Results",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/results",
+              "host": ["{{baseUrl}}"],
+              "path": ["results"]
+            },
+            "description": "Get all race results"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Results by Class",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/results?class=Pro",
+              "host": ["{{baseUrl}}"],
+              "path": ["results"],
+              "query": [
+                {
+                  "key": "class",
+                  "value": "Pro"
+                }
+              ]
+            },
+            "description": "Get results filtered by class"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Result by Vehicle",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/results/vehicle/{{vehicleId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["results", "vehicle", "{{vehicleId}}"]
+            },
+            "description": "Get race result for a specific vehicle"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Results by Class (Path)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/results/class/Pro",
+              "host": ["{{baseUrl}}"],
+              "path": ["results", "class", "Pro"]
+            },
+            "description": "Get results for a specific class"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Section Times",
+      "item": [
+        {
+          "name": "Get Fastest Section Times",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/sections?section=s1&limit=10",
+              "host": ["{{baseUrl}}"],
+              "path": ["sections"],
+              "query": [
+                {
+                  "key": "section",
+                  "value": "s1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ]
+            },
+            "description": "Get fastest section times"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Section Times by Vehicle",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/sections/vehicle/{{vehicleId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["sections", "vehicle", "{{vehicleId}}"]
+            },
+            "description": "Get section times for a specific vehicle"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Section Times by Vehicle and Lap",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/sections/vehicle/{{vehicleId}}/lap/{{lap}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["sections", "vehicle", "{{vehicleId}}", "lap", "{{lap}}"]
+            },
+            "description": "Get section times for a specific vehicle and lap"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Section Leaders",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/sections/leaders",
+              "host": ["{{baseUrl}}"],
+              "path": ["sections", "leaders"]
+            },
+            "description": "Get fastest vehicle for each section"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Section Leaders by Class",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/sections/leaders?class=Pro",
+              "host": ["{{baseUrl}}"],
+              "path": ["sections", "leaders"],
+              "query": [
+                {
+                  "key": "class",
+                  "value": "Pro"
+                }
+              ]
+            },
+            "description": "Get section leaders for a specific class"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Weather",
+      "item": [
+        {
+          "name": "Get All Weather Data",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/weather?page=1&limit=100",
+              "host": ["{{baseUrl}}"],
+              "path": ["weather"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "100"
+                }
+              ]
+            },
+            "description": "Get all weather data with pagination"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Weather for Time Range",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/weather/range?startTime=2024-03-15T14:00:00.000Z&endTime=2024-03-15T15:00:00.000Z",
+              "host": ["{{baseUrl}}"],
+              "path": ["weather", "range"],
+              "query": [
+                {
+                  "key": "startTime",
+                  "value": "2024-03-15T14:00:00.000Z"
+                },
+                {
+                  "key": "endTime",
+                  "value": "2024-03-15T15:00:00.000Z"
+                }
+              ]
+            },
+            "description": "Get weather data for a specific time range"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Weather Summary",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/weather/summary",
+              "host": ["{{baseUrl}}"],
+              "path": ["weather", "summary"]
+            },
+            "description": "Get aggregated weather statistics"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Rain Periods",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/weather/rain?minRain=1.0",
+              "host": ["{{baseUrl}}"],
+              "path": ["weather", "rain"],
+              "query": [
+                {
+                  "key": "minRain",
+                  "value": "1.0"
+                }
+              ]
+            },
+            "description": "Get time ranges when rain occurred"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Weather at Time",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/weather/at-time?time=2024-03-15T14:30:00.000Z",
+              "host": ["{{baseUrl}}"],
+              "path": ["weather", "at-time"],
+              "query": [
+                {
+                  "key": "time",
+                  "value": "2024-03-15T14:30:00.000Z"
+                }
+              ]
+            },
+            "description": "Get weather at a specific time (nearest measurement)"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Statistics",
+      "item": [
+        {
+          "name": "Get Overview Statistics",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/statistics/overview",
+              "host": ["{{baseUrl}}"],
+              "path": ["statistics", "overview"]
+            },
+            "description": "Get race-wide statistics"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Vehicle Statistics",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/statistics/vehicle/{{vehicleId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["statistics", "vehicle", "{{vehicleId}}"]
+            },
+            "description": "Get pre-computed statistics for a specific vehicle"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Leaderboard",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/statistics/leaderboard?sortBy=fastest_lap&order=asc&limit=50",
+              "host": ["{{baseUrl}}"],
+              "path": ["statistics", "leaderboard"],
+              "query": [
+                {
+                  "key": "sortBy",
+                  "value": "fastest_lap"
+                },
+                {
+                  "key": "order",
+                  "value": "asc"
+                },
+                {
+                  "key": "limit",
+                  "value": "50"
+                }
+              ]
+            },
+            "description": "Get ranked vehicles by performance metric"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Leaderboard by Class",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/statistics/leaderboard?class=Pro&sortBy=max_speed&order=desc",
+              "host": ["{{baseUrl}}"],
+              "path": ["statistics", "leaderboard"],
+              "query": [
+                {
+                  "key": "class",
+                  "value": "Pro"
+                },
+                {
+                  "key": "sortBy",
+                  "value": "max_speed"
+                },
+                {
+                  "key": "order",
+                  "value": "desc"
+                }
+              ]
+            },
+            "description": "Get leaderboard for a specific class"
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
